@@ -53,7 +53,7 @@ Ensure `glab` is authenticated by running `glab auth login` in your terminal.
 ==============================================================================
 COMMANDS                                                *gitlab-nvim-commands*
 
-*:GitlabCreateIssue*                                 *:GitlabCreateIssue*
+*:GitlabCreateIssue*
   Opens a UI to create a new GitLab issue for the current project.
   It will prompt for a title and description.
   If successful, it will ask if you want to create a new branch for this issue.
