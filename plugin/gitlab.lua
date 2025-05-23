@@ -1,34 +1,24 @@
--- Main plugin file for gitlab.nvim
+-- plugin/gitlab.lua
+-- This file is sourced by Neovim at startup.
+-- It should delegate to the main module in the lua/ directory.
 
-local M = {}
+-- Ensure the plugin's lua directory is on the runtime path if it's not already.
+-- This is usually handled by the plugin manager, but can be added for robustness if needed.
+-- package.path = package.path .. ';./lua/?.lua;./lua/?/init.lua'
 
----@class GitlabConfig
-local default_config = {
-  -- Default configuration options
-  -- e.g., default_project = "",
-}
+-- Require the main module. This will look for lua/gitlab.lua or lua/gitlab/init.lua.
+local gitlab = require('gitlab')
 
-M.config = default_config
+-- If your plugin has a setup function that needs to be called automatically,
+-- you can do it here, or instruct users to call it in their config.
+-- For example, if you want to call setup with default options:
+-- gitlab.setup({})
 
---- Setup the plugin with user-provided configuration
----@param opts GitlabConfig? User configuration options
-function M.setup(opts)
-  M.config = vim.tbl_deep_extend("force", {}, M.config, opts or {})
-  -- You might want to validate glab installation and auth status here
-end
+-- Or, more commonly, users will call setup from their Neovim configuration:
+-- require('gitlab').setup({
+--   -- user options
+-- })
 
--- Example command to be exposed
-local function create_issue_command()
-  require('gitlab.issue').create_issue_ui()
-end
-
-vim.api.nvim_create_user_command(
-  "GitlabCreateIssue",
-  create_issue_command,
-  { nargs = 0, desc = "Create a GitLab Issue" }
-)
-
--- Add more commands here as features are developed
--- e.g., GitlabCreateIssueBranch
-
-return M
+-- This file doesn't need to return anything specific unless other parts of
+-- Neovim's startup process expect it for this specific plugin structure.
+-- Often, plugin/ files don't return anything or return a minimal table if needed.
