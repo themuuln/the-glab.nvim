@@ -1,0 +1,91 @@
+*gitlab-nvim.txt*    For Neovim    Last change: {{DATE}}
+
+==============================================================================
+CONTENTS                                            *gitlab-nvim-contents*
+
+  1. Introduction.....................................|gitlab-nvim-introduction|
+  2. Installation...................................|gitlab-nvim-installation|
+  3. Usage............................................|gitlab-nvim-usage|
+  4. Commands.........................................|gitlab-nvim-commands|
+  5. Configuration..................................|gitlab-nvim-configuration|
+
+==============================================================================
+INTRODUCTION                                        *gitlab-nvim-introduction*
+
+`gitlab.nvim` is a Neovim plugin that allows you to interact with GitLab
+using the `glab` command-line tool. It provides features like creating issues,
+managing merge requests, and more, directly from Neovim.
+
+==============================================================================
+INSTALLATION                                      *gitlab-nvim-installation*
+
+Requirements:
+- Neovim 0.7+
+- `glab` CLI: https://gitlab.com/gitlab-org/cli#installation
+- `nui.nvim`: https://github.com/MunifTanjim/nui.nvim
+
+Using `packer.nvim`:
+
+```lua
+use {
+  'your-username/gitlab.nvim', -- Replace with the actual path if hosted
+  requires = {
+    'MunifTanjim/nui.nvim',
+  },
+  config = function()
+    require('gitlab').setup({
+      -- your options here
+    })
+  end
+}
+```
+
+Run `:PackerSync` after adding this to your configuration.
+
+==============================================================================
+USAGE                                                     *gitlab-nvim-usage*
+
+Once installed and configured, you can use the provided commands to interact
+with GitLab.
+
+Ensure `glab` is authenticated by running `glab auth login` in your terminal.
+
+==============================================================================
+COMMANDS                                                *gitlab-nvim-commands*
+
+*:GitlabCreateIssue*                                 *:GitlabCreateIssue*
+  Opens a UI to create a new GitLab issue for the current project.
+  It will prompt for a title and description.
+  If successful, it will ask if you want to create a new branch for this issue.
+
+  The plugin attempts to determine the current project based on the `git remote`
+  configuration.
+
+More commands will be added in the future.
+
+==============================================================================
+CONFIGURATION                                       *gitlab-nvim-configuration*
+
+To configure `gitlab.nvim`, call the `setup` function, typically in your
+`init.lua` or a dedicated plugin configuration file.
+
+Example:
+```lua
+require('gitlab').setup({
+  -- No specific configuration options are available yet.
+  -- This section is a placeholder for future settings.
+  -- For example:
+  -- default_branch_prefix = 'feature/',
+  -- notify_on_success = true,
+})
+```
+
+Default configuration:
+```lua
+{
+  -- No defaults yet
+}
+```
+
+==============================================================================
+vim:tw=78:ts=8:sw=2:et:ft=help:norl:
